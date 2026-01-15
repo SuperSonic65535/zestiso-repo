@@ -4,6 +4,16 @@ REPO_NAME="zestiso"
 cd "$REPO_DIR"
 echo "[UPDATE] Creating $REPO_NAME DB"
 
+RandomMsg() {
+	RNUM=$((1 + $RANDOM % 4))
+	case $RNUM in
+		1) echo "General stability improvements for optimised user experience";;
+		2) echo "Improved system software performance and stability";;
+		3) echo "General system stability improvements to enhance the user's experience.";;
+		4) echo "General security fixes for improved user experience";;
+	esac
+}
+
 # Delete old files
 rm -f "$REPO_DIR"/*.db "$REPO_DIR"/*.files "$REPO_DIR"/*.sig "$REPO_DIR"/*.tar.gz &> /dev/null
 
@@ -24,5 +34,5 @@ mv $REPO_NAME.db.tar.gz.sig $REPO_NAME.db.sig &> /dev/null
 mv $REPO_NAME.files.tar.gz.sig $REPO_NAME.files.sig &> /dev/null
 
 git add . && \
-git commit -m "General stability and performance improvements to optimise user experience." && \
+git commit -m "$(RandomMsg)" && \
 git push -u origin main
